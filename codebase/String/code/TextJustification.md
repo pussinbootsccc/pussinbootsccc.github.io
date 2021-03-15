@@ -6,19 +6,19 @@ permalink: /algorithm/string/testjustification
 
 Key Idea
 1. greedy find rightmost index that can fit into a line width
-2. call justifyLine() given left, right index
-3. update left = right + 1 to loop over the word list
+2. call `justifyLine()` given `left`, `right` index
+3. update `left = right + 1` to loop over the word list
 
 Notes
 
-normal lines: distribute spaces in gaps
-- default spaces: totalSpaces / # of gaps between a line of words
-- remainder spaces: to be distributed evenly among gaps, until all remainder spaces used up
-- sb.append(defaultSpaces).append(" " if remainder-- > 0);
+- normal lines: distribute spaces in gaps
+    - default spaces: `totalSpaces / # of gaps` in a line of words
+    - remainder spaces: to be distributed evenly among gaps, until used up
+    - `sb.append(defaultSpaces).append(" " if remainder-- > 0)`
 
-last line: single space in gaps
-- align with left with single space
-- padding spaces at right
+- last line: single space in gaps
+    - align with left, add a single space between words
+    - padding spaces at right
 
 
 {% highlight java %}
