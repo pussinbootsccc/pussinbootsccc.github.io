@@ -3,10 +3,12 @@ layout: page
 title: Rotate Matrix
 permalink: /algorithm/array/rotatematrix
 ---
+Rotate a matrix close-wisely by 90 degrees
 
 Key Ideas:
-1. k is absolute index, and it already carries offset info, as it starts as left
-3. (n - 1 - k) denotes absolute index of the last element in a sequence: (n-1) fixed, k changes each round
+- `k` is absolute index, and it already carries offset info, as it starts as left
+- `n - 1 - k` denotes absolute index of the last element in a side
+- rotate a node, swapping 4 values, in a round; runs `count of elements = right - left + 1` rounds, to rotate all nodes in a side.
 
 {% highlight java %}
 // Method 1:

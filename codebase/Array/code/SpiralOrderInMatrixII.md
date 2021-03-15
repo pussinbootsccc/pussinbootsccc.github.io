@@ -3,12 +3,12 @@ layout: page
 title: Spiral Order In Matrix II
 permalink: /algorithm/array/spiralorderinmatrixii
 ---
-The input matrix is M * N, not necessarily a square
+The input matrix is M * N, not necessarily a square   
 
 Key Idea
-1. main 4 indexes as boundaries
-2. `left`, `right`, horizontally scan, inclusive, range in `[left, right]`
-3. `up`, `down`, vertically scan, exclusive, range in `[up + 1, down - 1]`
+- main 4 indexes as boundaries
+    - `left`, `right`, horizontally scan, inclusive, range in `[left, right]`
+    - `up`, `down`, vertically scan, exclusive, range in `[up + 1, down - 1]`
 
 Note
 - first handle purely no overlaps cases, `left < right && up < down`
