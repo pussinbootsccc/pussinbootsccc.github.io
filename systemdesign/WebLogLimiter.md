@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Web Log Limiter
-permalink: /algorithm/systemdesign/webloglimiter
+permalink: /systemdesign/webloglimiter
 ---
 Implement a web logger, which provide two methods:  
 `hit(timestamp)`, record a hit at given timestamp.   

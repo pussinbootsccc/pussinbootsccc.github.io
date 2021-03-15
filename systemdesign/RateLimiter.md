@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Rate Limiter
-permalink: /algorithm/systemdesign/ratelimiter
+permalink: /systemdesign/ratelimiter
 ---
 Implement a rate limiter, provide one method: `is_ratelimited(timestamp, event, rate, increment)`.  
 
