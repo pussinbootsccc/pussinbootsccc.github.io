@@ -54,8 +54,8 @@ public class KSum {
             return;
         }
 
-        for (int num : matrix[level]) { // use one number in this level (curr row)
-            helper(matrix, level + 1, acc + num, N, map); // pass acc + sum to avoid backtrack acc explicitly
+        for (int num : matrix[level]) { // choose a number in this level (curr row)
+            helper(matrix, level + 1, acc + num, N, map); // pass acc + num to avoid backtrack acc explicitly
         }
     }
 
@@ -71,7 +71,7 @@ public class KSum {
 
         int count = 0;
         for (int num : matrix[level]) {
-            count += dfsCount(matrix, level + 1, acc + num, N, map); // pass acc + sum to avoid backtrack acc explicitly
+            count += dfsCount(matrix, level + 1, acc + num, N, map); // pass acc + num to avoid backtrack acc explicitly
         }
         return count;
     }
