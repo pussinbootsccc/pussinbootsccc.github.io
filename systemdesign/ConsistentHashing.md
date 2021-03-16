@@ -3,8 +3,11 @@ layout: page
 title: Consistent Hashing
 permalink: /systemdesign/consistenthashing
 ---
-There are many ways to implement this algorithm. Here we implement a simple Consistent Hashing.
+一般的数据库进行horizontal shard的方法是指，把id % 服务器总数n,来得到这个id该到哪台机器上。
+这种方法的缺点是，当数据继续增加，我们需要增加数据库服务器，将n变为n+1时，几乎所有的数据都要移动，这就造成了不consistent。  
+为了减少这种简答取模带来的缺陷，出现了一种新的hash算法：一致性哈希的算法——Consistent Hashing。  
 
+There are many ways to implement this algorithm. Here we implement a simple Consistent Hashing.
 Suppose all the data is on one machine at the beginning. When adding to the nth machine, what is the distribution of the interval and the corresponding machine number?
 
 Key Ideas:
