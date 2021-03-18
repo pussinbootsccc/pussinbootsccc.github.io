@@ -89,7 +89,7 @@ public class ConsistentHashingII {
         List<Integer> res = new ArrayList<>();
         int i = 0;
         while (true) {
-            int shardId = rand.nextInt(n); // n defines the amount of sections in hash ring
+            int shardId = rand.nextInt(n); // n defines # of sections in hash ring, it's large
             if (!map.containsKey(shardId)) {
                 map.put(shardId, machine_id); // a valid virtual node generated
                 res.add(shardId);
@@ -101,7 +101,6 @@ public class ConsistentHashingII {
     }
 
     public int getMachineIdByHashCode(int hashcode) {
-        // may use hashcode %= n; to ensure hashcode normalized to range [0, n-1]
         if (map.isEmpty()) {
             throw new IllegalStateException("No machine added yet.");
         }
