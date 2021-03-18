@@ -32,7 +32,7 @@ public class LogToCSV {
         String outputPath = "/Users/username/Desktop/output.csv";
         List<Map<String, String>> entries = new ArrayList<>();
 
-        // try (resource) will automatically close source/br， try-with-resources pattern
+        // try (resource) will automatically close the br， try-with-resources pattern
         try (BufferedReader br = new BufferedReader(new FileReader(inputPath))) { 
             String line;
             while ((line = br.readLine()) != null) {
@@ -56,7 +56,6 @@ public class LogToCSV {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
         }
     }
 
