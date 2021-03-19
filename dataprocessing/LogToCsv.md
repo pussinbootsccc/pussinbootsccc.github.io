@@ -121,3 +121,13 @@ for (String line : lines) {
 }
 bw.close();
 {% endhighlight %}
+
+**JAVA JOIN**
+{% highlight java %}
+String message = String.join("-", "Java", "is", "best"); // (delimiter, elements...)
+
+String csv = String.join(",", new String[] {"column1", "column2", "column3"});
+
+String[] header = {"column1", "column2", "column3"};
+String headerLine = String.join(",", header);
+{% endhighlight %}
