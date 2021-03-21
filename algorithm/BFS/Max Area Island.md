@@ -18,7 +18,7 @@ Key Ideas
 - try with each node to do bfs/dfs
 - maintain a global max area to be updated
 
-**BFS**
+**BFS**  
 {% highlight java %}
 public class MaxAreaOfIsland {
     static final int[][] directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
@@ -28,7 +28,7 @@ public class MaxAreaOfIsland {
         int max = 0;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] != -1) {
+                if (matrix[i][j] != Integer.MAX_VALUE) {
                     max = Math.max(max, bfsHelper(matrix, i, j));
                 }
             }
@@ -39,7 +39,7 @@ public class MaxAreaOfIsland {
     private int bfsHelper(int[][] matrix, int x, int y) {
         Queue<Node> queue = new ArrayDeque<>(); // maintain the same value connected nodes
         queue.offer(new Node(x, y, matrix[x][y]));
-        matrix[x][y] = -1; // denotes visited
+        matrix[x][y] = Integer.MAX_VALUE; // denotes visited
 
         int count = 0;
         while (!queue.isEmpty()) {
@@ -47,7 +47,7 @@ public class MaxAreaOfIsland {
             count++; // a connected component found
             for (Node neighbor : findValidNeighbors(matrix, curr)) {
                 queue.offer(neighbor);
-                matrix[neighbor.x][neighbor.y] = -1; // mark as visited
+                matrix[neighbor.x][neighbor.y] = Integer.MAX_VALUE; // mark as visited
             }
         }
         return count;
@@ -62,7 +62,7 @@ public class MaxAreaOfIsland {
             int newY = curr.y + dir[1];
             if (newX >= 0 && newX < m && newY >= 0 && newY < n) { // within boundary
                 int value = matrix[newX][newY];
-                if (value != - 1 && value == curr.val) { // neighbor not visited && the same value as curr node
+                if (value != Integer.MAX_VALUE && value == curr.val) { // neighbor not visited && the same value as curr node
                     res.add(new Node(newX, newY, value));
                 }
             }
@@ -82,10 +82,11 @@ public class MaxAreaOfIsland {
     }
 }
 {% endhighlight %}
+TC: O(M * N)  
+SC: O(M * N) worse case, to draw a spiral stroke that passes through all nodes in matrix, that takes up M * N size.      
+    O(M + N) might be average case, the active size of queue is the sum(side length) of the boundaries. 
 
 **DFS**   
-drawbacks: the chance of causing `StackOverflowError` due to level of recursion exceeding the stack size.
-
 {% highlight java %}
 public class MaxAreaOfIsland {
     static final int[][] directions = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
@@ -95,7 +96,7 @@ public class MaxAreaOfIsland {
         int n = matrix[0].length;
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                if (matrix[i][j] != -1) {
+                if (matrix[i][j] != Integer.MAX_VALUE) {
                     res = Math.max(res, helper(matrix, i, j));
                 }
             }
@@ -105,7 +106,7 @@ public class MaxAreaOfIsland {
 
     private int helper(int[][] matrix, int x, int y) {
         int val = matrix[x][y];
-        matrix[x][y] = -1; // mark as visited
+        matrix[x][y] = Integer.MAX_VALUE; // mark as visited
         int area = 1;
         for (int[] dir : directions) {
             int newX = x + dir[0];
@@ -120,3 +121,7 @@ public class MaxAreaOfIsland {
     }
 }
 {% endhighlight %}
+drawbacks: the chance of causing `StackOverflowError` due to level of recursion exceeding the stack size.  
+TC: O(M * N)  
+SC: O(M * N), the worst case for the level of the stack: think about a spiral alike search, the trace goes through all nodes.   
+    this may exceed the max depth of the stack, (but such queue's size can fit into memory).
