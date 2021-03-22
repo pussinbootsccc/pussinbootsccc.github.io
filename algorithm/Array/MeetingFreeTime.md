@@ -35,7 +35,6 @@ public class MeetingFreeTime {
 
     public List<Node> findFreeTime(List<Node> meetings, int startTime, int endTime, int duration) {
         Collections.sort(meetings, (x, y) -> x.start < y.start ? -1 : 1);
-        System.out.println(meetings);
 
         List<Node> res = new ArrayList<>();
         int busyEnd = startTime; // maintain a global max busyEnd (largest end value among the busy nodes)
@@ -56,16 +55,6 @@ public class MeetingFreeTime {
         }
         return res;
 
-    }
-
-    public static void main(String[] args) {
-        int[][] input = { {-2, 0}, {3, 20}, {-10, -8}, {0, 2}, {16, 17}, {19, 23}, {30, 40}, {27, 33} };
-        List<Node> meetings = new ArrayList<>();
-        for (int[] m : input) {
-            meetings.add(new Node(m[0], m[1]));
-        }
-        MeetingFreeTime s = new MeetingFreeTime();
-        System.out.println(s.findFreeTime(meetings, -5, 30, 2));
     }
 }
 {% endhighlight %}
