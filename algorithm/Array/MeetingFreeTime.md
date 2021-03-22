@@ -21,6 +21,8 @@ Key Ideas
 - a free slot appears when `busyEnd <= meeting.start`.  
 - need to check if within the valid time zone.  
 
+Notes
+- corner case: free slot after all nodes before the endTime.
 
 {% highlight java %}
 public class MeetingFreeTime {
@@ -53,8 +55,22 @@ public class MeetingFreeTime {
                 break;
             }
         }
-        return res;
 
+        if (busyEnd <= endTime) { // corner case: if there still free time slot after all nodes
+            res.add(new Node(busyEnd, endTime));
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[][] input = { {0, 10}, {5,15}, {20, 30}, {40, 50} };
+        List<Node> meetings = new ArrayList<>();
+        for (int[] m : input) {
+            meetings.add(new Node(m[0], m[1]));
+        }
+        MeetingFreeTime s = new MeetingFreeTime();
+        System.out.println(s.findFreeTime(meetings, -5, 60, 8));
     }
 }
 {% endhighlight %}
