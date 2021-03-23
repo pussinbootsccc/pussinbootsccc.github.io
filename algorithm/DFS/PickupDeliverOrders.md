@@ -7,7 +7,7 @@ permalink: /algorithm/dfs/pickupdeliverorders
 check if the given input is a valid sequence.  
   
 {% highlight bash %}
-valid:   "P12P2D12D2", "P1P29D29D1"
+valid:   "P12P2D12D2", "P1P29D29D1", "P1D1P2D2", "P2P1D1D2", "P2P1D2D1", "P2D2P1D1"
 invalid: "P1D1P2D1", "P1D2P2D1", "P2P2D2D2", "P2D1P1D2"
 {% endhighlight %}
 
@@ -67,8 +67,8 @@ output = [P1, P2, D1, D2], [P1, P2, D2, D1], [P1, D1, P2, D2], [P2, P1, D1, D2],
 public class ValidPickupAndDeliveryOrdersII {
     List<List<String>> generateAll(int n) {
         List<List<String>> res = new ArrayList<>();
-        boolean[] pick = new boolean[n];
-        boolean[] deliver = new boolean[n];
+        boolean[] pick = new boolean[n]; // such id has been picked
+        boolean[] deliver = new boolean[n]; // such id has been delivered
         helper(pick, deliver, new ArrayList<>(), res, n);
         return res;
     }
@@ -85,7 +85,7 @@ public class ValidPickupAndDeliveryOrdersII {
                 path.add("P" + (i + 1));
                 helper(pick, deliver, path, res, n);
                 pick[i] = false; // reset
-                path.remove(path.size() - 1);
+                path.remove(path.size() - 1); // reset
             }
         }
         // choose D case
