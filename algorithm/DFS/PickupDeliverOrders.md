@@ -75,7 +75,7 @@ public class ValidPickupAndDeliveryOrdersII {
 
     private void helper(boolean[] pick, boolean[] deliver, List<String> path, List<List<String>> res, int n) {
         if (path.size() == n * 2) {
-            res.add(new ArrayList<>(path));
+            res.add(new ArrayList<>(path)); // res.add(String.join("", path)) can make a concat String
             return;
         }
         // choose P case
