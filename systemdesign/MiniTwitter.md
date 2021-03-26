@@ -31,6 +31,13 @@ public class MiniTwitter {
         }
     }
 
+    static class MyComparator implements Comparator<Node> {
+        @Override
+        public int compare(Node n1, Node n2) {
+          return n1.order > n2.order ? -1 : 1; // timestamp larger first
+        }
+    }
+
     private Map<Integer, Set<Integer>> friends;
     private Map<Integer, List<Node>> tweets;
     private int order;
@@ -39,15 +46,6 @@ public class MiniTwitter {
         this.tweets = new HashMap<>(); // userID: her list of tweet nodes
         this.order = 0; // a twitter service's instance field, to track a global order of tweets nodes
     }
-
-    static class MyComparator implements Comparator {
-        public int compare(Object o1, Object o2) {
-            Node n1 = (Node)o1;
-            Node n2 = (Node)o2;
-            return n1.order > n2.order ? -1 : 1; // timestamp larger first
-        }
-    }
-
 
     public Tweet postTweet(int userId, String text) {
         Tweet tweet = Tweet.create(userId, text);
@@ -58,7 +56,6 @@ public class MiniTwitter {
         tweets.get(userId).add(new Node(order, tweet));
         return tweet;
     }
-
 
     public List<Tweet> getNewsFeed(int userId) {
         List<Node> tmp = new ArrayList<>();
