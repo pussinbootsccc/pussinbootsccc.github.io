@@ -8,7 +8,7 @@ check if the given input is a valid sequence.
   
 {% highlight bash %}
 valid:   "P12P2D12D2", "P1P29D29D1", "P1D1P2D2", "P2P1D1D2", "P2P1D2D1", "P2D2P1D1"
-invalid: "P1D1P2D1", "P1D2P2D1", "P2P2D2D2", "P2D1P1D2"
+invalid: "P1D1P2D1", "P1D2P2D1", "P2P2D2D2", "P2D1P1D2", "P1D1P1D1"
 {% endhighlight %}
 
 {% highlight java %}
@@ -24,7 +24,8 @@ public class ValidPickupAndDeliveryOrders {
     }
 
     private boolean valid(String s) {
-        Set<Integer> mySet = new HashSet<>(); // to simulate the container for the orders
+        Set<Integer> pickSet = new HashSet<>();
+        Set<Integer> deliverSet = new HashSet<>();
 
         int i = 0;
         int n = s.length();
@@ -36,8 +37,9 @@ public class ValidPickupAndDeliveryOrders {
                     pickID = pickID * 10 + (s.charAt(i) - '0');
                     i++;
                 }
-                if (mySet.contains(pickID)) return false;
-                mySet.add(pickID);
+                if (pickSet.contains(pickID))
+                    return false;
+                pickSet.add(pickID);
 
             } else if (s.charAt(i) == 'D') { // delivery case: delete id from set
                 i++; // points to digit
@@ -46,11 +48,12 @@ public class ValidPickupAndDeliveryOrders {
                     deliveryID = deliveryID * 10 + (s.charAt(i) - '0');
                     i++;
                 }
-                if (!mySet.contains(deliveryID)) return false; // pick-up set not hold delivery id
-                mySet.remove(deliveryID);
+                if (!pickSet.contains(deliveryID) || deliverSet.contains(deliveryID))
+                    return false; // pick-up set not hold delivery id or delivery id repeated
+                deliverSet.add(deliveryID);
             }
         }
-        return mySet.isEmpty(); // finish dispatch all orders
+        return pickSet.size() == deliverSet.size(); // finish dispatch all orders
     }
 }
 {% endhighlight %}
