@@ -28,7 +28,7 @@ public int numSubarrayBoundedMax(int[] A, int L, int R) {
     for (int i = 0; i < n; i++) {
         if (A[i] < L) {
             if (i > 0) {
-                dp[i] = dp[i - 1];
+                dp[i] = dp[i - 1]; // // count of must ending at i, the same as count of must ending at i-1
             } // else dp[0] = 0, no need to write it out
         }
         else if (A[i] > R) {
