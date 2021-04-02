@@ -41,6 +41,7 @@ public class ThreadConcurrency {
 {% endhighlight %}
 
 **JAVA Anonymous Class**
+匿名类：Java 中可以实现一个类中包含另外一个类，且不提供任何的类名直接***实例化***
 
 ***extend a Class***
 {% highlight java %}
